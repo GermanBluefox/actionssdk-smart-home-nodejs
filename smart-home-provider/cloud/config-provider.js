@@ -13,10 +13,10 @@
 
 var Config = {};
 
-Config.devPortSmartHome = "3000";
+Config.devPortSmartHome = "443";
 Config.smartHomeProviderGoogleClientId = "ZxjqWpsYj3"; // client id that Google will use
 Config.smartHomeProvideGoogleClientSecret = "hIMH3uWlMVrqa7FAbKLBoNUMCyLCtv"; // client secret that Google will use
-Config.smartHomeProviderApiKey = "<API_KEY>"; // client API Key generated on the console
+Config.smartHomeProviderApiKey = "AIzaSyDj5uBksgaY-XXXXXXXXXXXXXXXXXX"; // client API Key generated on the console
 Config.isLocal = false;
 
 function init() {
@@ -27,7 +27,7 @@ function init() {
       Config.isLocal = true;
   });
   if (!Config.smartHomeProviderCloudEndpoint)
-    Config.smartHomeProviderCloudEndpoint = "http://localhost:3000";
+    Config.smartHomeProviderCloudEndpoint = "http://localhost:" + Config.devPortSmartHome;
   console.log("config: ", Config);
 }
 init();

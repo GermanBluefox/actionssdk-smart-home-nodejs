@@ -437,7 +437,17 @@ app.requestSync = function (authToken, uid) {
 
 const appPort = process.env.PORT || config.devPortSmartHome;
 
-const server = app.listen(appPort, function () {
+const fs = require('fs');
+// here must be of course own certificates
+const credentials = {
+	ca: fs.readFileSync('/opt/letsencrypt/live/iobroker.info/fullchain.pem'),
+	cert: fs.readFileSync('/opt/letsencrypt/live/iobroker.info/cert.pem'),
+	key: fs.readFileSync('/opt/letsencrypt/live/iobroker.info/privkey.pem')
+};
+
+let httpsServer =  require('https').createServer(credentials, app);
+
+const server = httpsServer.listen(appPort, '0.0.0.0', function () {
   const host = server.address().address;
   const port = server.address().port;
   // Check that the API key was changed from the default
